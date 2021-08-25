@@ -3,6 +3,7 @@ import db from "../../db/models/index.js";
 const Product = db.Product;
 const Review = db.Review;
 import s from "sequelize";
+import Category from "../../db/models/Category.js";
 const { Op } = s;
 
 const router = express.Router();
@@ -25,7 +26,8 @@ router
       console.log({ name: `%${name}` });
       const data = await Product.findAll({
         ...filter,
-        include: Review,
+        //  include: [Review, Category],
+        include: [{ model: Review }, { model: Category }],
       });
       res.send(data);
     } catch (error) {
