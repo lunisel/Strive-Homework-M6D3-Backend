@@ -23,11 +23,11 @@ router
         : {};
 
       console.log({ name: `%${name}` });
-      const data = await Author.findAll({
+      const data = await Product.findAll({
         //  attributes: ["id", "name"],   select columns
-        attributes: { exclude: ["avatar"] }, // exclude columns
+        attributes: { exclude: ["image_url"] }, // exclude columns
         ...filter,
-        include: Blog,
+        include: Review,
       });
       res.send(data);
     } catch (error) {
@@ -37,7 +37,7 @@ router
   })
   .post(async (req, res, next) => {
     try {
-      const data = await Author.create(req.body);
+      const data = await Product.create(req.body);
       res.send(data);
     } catch (error) {
       console.log(error);
@@ -49,7 +49,7 @@ router
   .route("/:id")
   .get(async (req, res, next) => {
     try {
-      const data = await Author.findByPk(req.params.id);
+      const data = await Product.findByPk(req.params.id);
       res.send(data);
     } catch (error) {
       console.log(error);
@@ -58,7 +58,7 @@ router
   })
   .put(async (req, res, next) => {
     try {
-      const data = await Author.update(req.body, {
+      const data = await Product.update(req.body, {
         where: { id: req.params.id },
         returning: true,
       });
@@ -70,7 +70,7 @@ router
   })
   .delete(async (req, res, next) => {
     try {
-      const rows = await Author.destroy({
+      const rows = await Product.destroy({
         where: {
           id: req.params.id,
         },
