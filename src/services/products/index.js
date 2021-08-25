@@ -24,8 +24,6 @@ router
 
       console.log({ name: `%${name}` });
       const data = await Product.findAll({
-        //  attributes: ["id", "name"],   select columns
-        attributes: { exclude: ["image_url"] }, // exclude columns
         ...filter,
         include: Review,
       });
